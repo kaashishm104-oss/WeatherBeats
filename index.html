@@ -6,18 +6,110 @@
 <title>Weather Beats — Forecast your soundtrack</title>
 <style>
 :root{font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,sans-serif;color:#f6f5ff;background:#0d1020;font-synthesis:none}*{box-sizing:border-box}body{margin:0;min-height:100vh;background:radial-gradient(ellipse at 80% 0%,#32305b 0%,transparent 48%),radial-gradient(ellipse at 0% 80%,#173d53 0%,transparent 40%),#0d1020}button,input,select{font:inherit}button{cursor:pointer}button:focus-visible,input:focus-visible,select:focus-visible,a:focus-visible{outline:3px solid #b8f2df;outline-offset:3px}.wrap{max-width:1120px;margin:auto;padding:26px 22px 72px}header{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:64px}.brand{font-size:1.3rem;font-weight:850;letter-spacing:-.05em}.brand span{color:#b7f4df}.pill{border:1px solid #ffffff35;border-radius:40px;padding:9px 15px;color:#c5c6d8;font-size:.82rem}.hero{max-width:790px;margin:0 auto 45px;text-align:center}.eyebrow{color:#b7f4df;font-size:.8rem;font-weight:750;letter-spacing:.22em;text-transform:uppercase}h1{font-size:clamp(2.9rem,7vw,5.9rem);letter-spacing:-.075em;line-height:1.05;margin:17px 0}h1 em{font-style:normal;color:#b7f4df}.sub{color:#b9bdd2;line-height:1.7;font-size:1.05rem}.search{display:flex;gap:10px;max-width:650px;margin:30px auto 12px;background:#ffffff12;border:1px solid #ffffff24;border-radius:18px;padding:9px}.search input{flex:1;min-width:0;background:none;color:white;border:0;padding:12px;outline:none}.search button,.primary{background:#b7f4df;border:0;border-radius:12px;padding:13px 20px;color:#102a27;font-weight:800}.search button:hover,.primary:hover{background:#d4fff0}.small-actions{display:flex;gap:14px;justify-content:center;align-items:center;flex-wrap:wrap}.ghost{color:#c5e8ff;background:none;border:0;text-decoration:underline;text-underline-offset:4px}.hint{color:#8f94ae;font-size:.85rem}.error{color:#ffd3d3;background:#6d2e3a66;border:1px solid #e77a7a66;padding:13px;border-radius:12px;max-width:650px;margin:16px auto}.hidden{display:none!important}.grid{display:grid;grid-template-columns:1fr 1.1fr;gap:22px}.panel{background:#ffffff0d;border:1px solid #ffffff20;border-radius:26px;padding:30px;box-shadow:0 20px 70px #0002}.label{font-size:.75rem;text-transform:uppercase;letter-spacing:.18em;color:#aeb3cb;font-weight:750}.weather-main{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:28px 0}.temp{font-size:clamp(4rem,8vw,6rem);font-weight:800;letter-spacing:-.09em}.weather-icon{font-size:5rem}.city{font-size:1.6rem;font-weight:750;margin:8px 0}.muted{color:#b8bdd1}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:32px}.stat{padding:15px 8px;background:#ffffff0a;border-radius:14px;text-align:center}.stat strong{display:block;margin-top:8px;font-size:1.12rem}.mood{display:inline-block;color:#122b27;background:#b7f4df;padding:7px 13px;border-radius:30px;font-size:.85rem;font-weight:800;margin-top:14px}.mood-title{font-size:clamp(2rem,4vw,3rem);line-height:1.1;letter-spacing:-.06em;margin:17px 0}.playlist{margin-top:20px;display:grid;gap:10px}.track{display:flex;align-items:center;gap:13px;padding:13px;background:#ffffff0a;border:1px solid #ffffff12;border-radius:15px;text-decoration:none;color:inherit;transition:background .2s}.track:hover{background:#ffffff1c}.art{display:grid;place-items:center;width:50px;height:50px;flex:none;border-radius:12px;background:linear-gradient(135deg,#b7f4df,#8583de);color:#16243c;font-size:1.35rem}.track-text{flex:1;min-width:0}.track strong,.track small{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.track small{color:#b9bdd2;margin-top:4px}.arrow{color:#b7f4df}.preferences{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-top:20px}.preferences select{background:#24263d;color:white;border:1px solid #ffffff35;padding:10px;border-radius:10px}.footnote{font-size:.78rem;color:#a6abc3;margin-top:18px;line-height:1.6}footer{text-align:center;color:#8e94ae;font-size:.83rem;margin-top:55px}@media(max-width:740px){header{margin-bottom:38px}.grid{grid-template-columns:1fr}.panel{padding:23px}.search{flex-wrap:wrap}.search input{flex-basis:100%}.search button{flex:1}.stats{gap:6px}.stat{font-size:.8rem}.hero{margin-bottom:30px}}
+
+/* Weather Beats — motion-forward visual refresh */
+:root{--mint:#b7f4df;--lavender:#b6a1ff;--glass:rgba(23,26,55,.62)}
+html{scroll-behavior:smooth}
+body{overflow-x:hidden;background:#080b1a;color:#f7f5ff}
+body::before{content:"";position:fixed;inset:0;z-index:-3;background:radial-gradient(ellipse 60% 65% at 85% 8%,#40316b99,transparent 75%),radial-gradient(ellipse 65% 58% at 10% 80%,#0c667455,transparent 75%),linear-gradient(150deg,#090b1a,#111029 55%,#090d20);animation:aurora 19s ease-in-out infinite alternate;pointer-events:none}
+body::after{content:"";position:fixed;inset:0;z-index:-2;opacity:.14;pointer-events:none;background-image:radial-gradient(#fefefe 0.6px,transparent .7px);background-size:20px 20px;mask-image:linear-gradient(to bottom,#000,transparent 95%)}
+@keyframes aurora{0%{filter:hue-rotate(0);transform:scale(1)}100%{filter:hue-rotate(24deg);transform:scale(1.18)}}
+.wrap{max-width:1190px;position:relative;padding:28px 26px 80px}
+header{margin-bottom:58px;position:relative;z-index:3}
+.brand{display:flex;align-items:center;gap:10px;font-weight:900;font-size:1.35rem;letter-spacing:-.065em}
+.brand-mark{width:39px;height:39px;border-radius:13px;display:grid;place-items:center;color:#081c22;background:linear-gradient(140deg,#d5ffe9,#95e9d8 50%,#a69fff);box-shadow:0 7px 30px #9fe7e333;font-size:1.1rem}
+.pill{background:#ffffff0b;backdrop-filter:blur(15px);border-color:#ffffff26;display:flex;align-items:center;gap:9px}
+.pill::before{content:"";height:7px;width:7px;border-radius:50%;background:#b7f4df;box-shadow:0 0 11px #b7f4df;animation:pulse 2s infinite}
+@keyframes pulse{50%{opacity:.35;transform:scale(.7)}}
+.hero{max-width:980px;position:relative;margin:0 auto 56px;padding:10px 0 18px;isolation:isolate}
+.eyebrow{display:inline-flex;align-items:center;gap:10px;letter-spacing:.2em;border:1px solid #b7f4df45;color:#c1ffeb;padding:10px 18px;border-radius:99px;background:#b7f4df0d;animation:fadeUp .8s both}
+.eyebrow::before{content:"✦";font-size:1rem}
+h1{font-size:clamp(3.15rem,7.4vw,6.8rem);margin:25px 0 18px;font-weight:900;letter-spacing:-.087em;line-height:1.04;animation:fadeUp .9s .12s both;text-shadow:0 12px 45px #0004}
+h1 em{background:linear-gradient(110deg,#b8ffe9,#bfc9ff 60%,#f0b6fd);background-clip:text;-webkit-background-clip:text;color:transparent;background-size:200%;animation:gradientFloat 7s ease-in-out infinite}
+@keyframes gradientFloat{50%{background-position:100% 0}}
+.sub{max-width:570px;margin:0 auto;color:#bbc0d8;font-size:1.09rem;animation:fadeUp .85s .22s both}
+.search{margin-top:35px;max-width:665px;position:relative;z-index:2;border-radius:20px;border:1px solid #ffffff3c;padding:8px;background:rgba(33,34,63,.77);backdrop-filter:blur(24px);box-shadow:0 16px 50px #0005,0 0 40px #b7f4df0a;animation:fadeUp .85s .3s both;transition:border-color .25s,box-shadow .25s}
+.search:focus-within{border-color:#b7f4dfa8;box-shadow:0 18px 55px #0006,0 0 32px #b7f4df20}
+.search input{font-size:1rem;padding:15px}
+.search button,.primary{background:linear-gradient(135deg,#d6ffe8,#a8eeda);box-shadow:0 7px 25px #b7f4df24;transition:transform .22s,box-shadow .22s,filter .22s}
+.search button:hover,.primary:hover{transform:translateY(-2px);box-shadow:0 12px 30px #b7f4df3b;filter:brightness(1.05)}
+.search button:disabled{opacity:.65;cursor:progress}
+.small-actions{animation:fadeUp .85s .4s both;margin-top:12px}
+.ghost{text-decoration:none;border-bottom:1px solid #9cdceb88;padding:5px 0;transition:color .2s}
+.ghost:hover{color:white}
+.hero-scene{position:absolute;inset:-100px -9% -75px;z-index:-1;pointer-events:none;overflow:hidden}
+.orb{position:absolute;border-radius:50%;filter:blur(1px);animation:float 7s ease-in-out infinite}
+.orb-a{height:300px;width:300px;top:5%;right:-3%;background:radial-gradient(circle at 30% 30%,#ffd8b9cc,#cf8fc155 32%,#7e66b322 62%,transparent 72%);box-shadow:0 0 110px #dd97ce22}
+.orb-b{height:200px;width:200px;bottom:3%;left:-2%;background:radial-gradient(circle at 30% 30%,#b8fff6aa,#5eafe84d 36%,transparent 72%);animation-delay:-3s}
+.orb-c{height:95px;width:95px;right:12%;bottom:16%;background:radial-gradient(circle,#bba9fa80,transparent 72%);animation-delay:-5s}
+@keyframes float{50%{transform:translate3d(0,-22px,0) rotate(7deg)}}
+.hero-line{position:absolute;inset:17% 12%;border-radius:50%;border:1px solid #ffffff0d;transform:rotate(-19deg);box-shadow:0 0 0 55px #ffffff03,0 0 0 110px #ffffff02}
+.spark{position:absolute;height:3px;width:3px;border-radius:50%;background:#dcfff3;box-shadow:0 0 13px #c2ffeb;animation:twinkle 3s ease-in-out infinite}
+@keyframes twinkle{50%{opacity:.15;transform:scale(.5)}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(25px)}to{opacity:1;transform:translateY(0)}}
+.grid{gap:24px;align-items:stretch}
+.panel{position:relative;overflow:hidden;background:linear-gradient(155deg,rgba(43,46,82,.64),rgba(16,25,43,.72));backdrop-filter:blur(28px);border:1px solid #ffffff25;border-radius:30px;padding:32px;box-shadow:0 25px 70px #0005;transition:transform .4s,border-color .4s,box-shadow .4s}
+.panel:hover{transform:translateY(-4px);border-color:#b7f4df4d;box-shadow:0 30px 80px #0006}
+.panel::before{content:"";position:absolute;inset:0 0 auto;height:1px;background:linear-gradient(90deg,transparent,#ffffff66,transparent)}
+.panel:first-child::after{content:"";position:absolute;top:-80px;right:-90px;width:280px;height:280px;border-radius:50%;background:radial-gradient(circle,#b6a1ff22,transparent 70%);pointer-events:none}
+#results:not(.hidden) .panel{animation:fadeUp .85s both}
+#results:not(.hidden) .panel:nth-child(2){animation-delay:.14s}
+.label{color:#b8c0d9;font-size:.75rem}
+.city{font-size:1.7rem;letter-spacing:-.04em;margin-top:17px}
+.weather-main{min-height:180px;margin:22px 0}
+.temp{font-size:clamp(5rem,9vw,7.5rem);line-height:1.1;background:linear-gradient(120deg,#fff,#cbfce7);background-clip:text;-webkit-background-clip:text;color:transparent}
+.weather-icon{font-size:5.5rem;filter:drop-shadow(0 10px 22px #d3d1ff40);animation:weatherFloat 5s ease-in-out infinite}
+@keyframes weatherFloat{50%{transform:translateY(-12px) rotate(5deg)}}
+.stats{margin-top:20px;gap:10px}
+.stat{padding:18px 8px;border:1px solid #ffffff14;background:#ffffff0a;border-radius:18px;color:#c7cbe0;transition:background .3s,transform .3s}
+.stat:hover{background:#ffffff1a;transform:translateY(-3px)}
+.stat strong{color:#fff;font-size:1.17rem}
+.mood{background:linear-gradient(110deg,#b7f4df,#c8deff);letter-spacing:.02em;box-shadow:0 6px 20px #aafad021}
+.mood-title{font-size:clamp(2.25rem,4vw,3.4rem);margin:18px 0;line-height:1.04}
+#genre{transition:border-color .2s,background .2s}
+#genre:hover{border-color:#c1f5e0}
+.playlist{gap:10px;margin-top:24px}
+.track{position:relative;background:rgba(255,255,255,.055);border:1px solid #ffffff18;padding:12px;border-radius:17px;transition:transform .25s,background .25s,border-color .25s,box-shadow .25s;animation:trackIn .55s both}
+.track:nth-child(2){animation-delay:.07s}.track:nth-child(3){animation-delay:.14s}.track:nth-child(4){animation-delay:.21s}.track:nth-child(5){animation-delay:.28s}.track:nth-child(6){animation-delay:.35s}
+@keyframes trackIn{from{opacity:0;transform:translateX(14px)}to{opacity:1;transform:translateX(0)}}
+.track:hover{transform:translateX(6px);background:#ffffff19;border-color:#b7f4df6b;box-shadow:0 8px 28px #0002}
+.art{position:relative;overflow:hidden;background:linear-gradient(140deg,#bdffe9,#a2acef 55%,#ecb5ef);font-weight:900;box-shadow:inset 0 0 18px #ffffff5c}
+.art::after{content:"";position:absolute;inset:-80%;background:linear-gradient(90deg,transparent,#ffffff66,transparent);transform:rotate(35deg) translateX(-70%);transition:transform .5s}
+.track:hover .art::after{transform:rotate(35deg) translateX(60%)}
+.arrow{font-size:1.2rem;transition:transform .2s}.track:hover .arrow{transform:translate(2px,-2px)}
+.footnote{color:#979db7}
+footer{margin-top:70px;border-top:1px solid #ffffff18;padding-top:26px}
+body[data-weather="rainy"]{--weather-tint:#6b9eed}
+body[data-weather="sunny"]{--weather-tint:#ffdc89}
+body[data-weather="stormy"]{--weather-tint:#a69aff}
+body[data-weather="cloudy"]{--weather-tint:#a8b8ef}
+body[data-weather="cold"]{--weather-tint:#a6e9f1}
+.weather-bits{position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden}
+.weather-bit{position:absolute;top:-10%;width:2px;height:28px;opacity:.25;background:linear-gradient(transparent,var(--weather-tint,#b7f4df));transform:rotate(14deg);animation:drift linear infinite}
+body[data-weather="sunny"] .weather-bit,body[data-weather="cloudy"] .weather-bit,body[data-weather="cold"] .weather-bit{width:4px;height:4px;border-radius:50%;transform:none;box-shadow:0 0 10px var(--weather-tint,#b7f4df)}
+body[data-weather="stormy"] .weather-bit{height:45px;opacity:.42}
+@keyframes drift{to{top:110%;transform:translateX(-70px) rotate(14deg)}}
+.loading-indicator{display:none;margin:10px auto 0;text-align:center;color:#bcffeb;font-size:.84rem}
+body.is-loading .loading-indicator{display:block}
+.equalizer{display:flex;align-items:flex-end;justify-content:center;gap:3px;height:17px}
+.equalizer i{display:block;width:3px;height:5px;background:#b7f4df;border-radius:3px;animation:bars .7s ease-in-out infinite alternate}
+.equalizer i:nth-child(2){animation-delay:-.25s}.equalizer i:nth-child(3){animation-delay:-.45s}.equalizer i:nth-child(4){animation-delay:-.1s}
+@keyframes bars{to{height:16px}}
+@media(max-width:740px){.wrap{padding:20px 16px 55px}header{margin-bottom:35px}.pill{font-size:.7rem;padding:8px 10px}.hero-scene{inset:-40px -12% -30px}.orb-a{width:180px;height:180px;right:-12%}.orb-b{width:130px;height:130px}.hero{margin-bottom:35px}h1{font-size:clamp(3rem,11vw,4.7rem)}.grid{gap:18px}.panel{padding:23px}.weather-main{min-height:145px}.weather-icon{font-size:4.5rem}.temp{font-size:5.2rem}.stat{padding:13px 5px}.search button{min-height:45px}.track:hover{transform:none}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}.weather-bits,.spark{display:none!important}}
+
 </style>
 </head>
 <body><div class="wrap">
-<header><div class="brand">☁️ Weather<span>Beats</span></div><div class="pill">♪ Your forecast, your frequency</div></header>
+<header><div class="brand"><span class="brand-mark" aria-hidden="true">♫</span> Weather<span>Beats</span></div><div class="pill">♪ Your forecast, your frequency</div></header>
 <main>
-<section class="hero"><div class="eyebrow">A soundtrack for every sky</div><h1>Feel the weather.<br><em>Find your rhythm.</em></h1><p class="sub">From sunny afternoons to rainy evenings, discover music that matches the atmosphere around you.</p>
+<section class="hero"><div class="hero-scene" aria-hidden="true"><div class="hero-line"></div><div class="orb orb-a"></div><div class="orb orb-b"></div><div class="orb orb-c"></div><div id="sparkles"></div></div><div class="eyebrow">A soundtrack for every sky</div><h1>Feel the weather.<br><em>Find your rhythm.</em></h1><p class="sub">From sunny afternoons to rainy evenings, discover music that matches the atmosphere around you.</p>
 <form id="searchForm" class="search"><input id="cityInput" type="search" placeholder="Enter a city, e.g. Moradabad" aria-label="City name" maxlength="100" required><button type="submit" id="searchButton">Explore weather ↗</button></form>
-<div class="small-actions"><button id="locateButton" class="ghost" type="button">◎ Use my location</button><span class="hint">No account or API key needed</span></div><div id="error" class="error hidden" role="alert"></div></section>
+<div class="loading-indicator" role="status"><div class="equalizer" aria-hidden="true"><i></i><i></i><i></i><i></i></div> Reading the skies & finding your sound...</div><div class="small-actions"><button id="locateButton" class="ghost" type="button">◎ Use my location</button><span class="hint">No account or API key needed</span></div><div id="error" class="error hidden" role="alert"></div></section>
 <section id="results" class="grid hidden" aria-live="polite">
 <article class="panel"><div class="label">Current conditions</div><div id="cityName" class="city"></div><div id="localTime" class="muted"></div><div class="weather-main"><div><div id="temperature" class="temp"></div><div id="condition" class="muted"></div></div><div id="weatherIcon" class="weather-icon" aria-hidden="true"></div></div><div class="stats"><div class="stat">💧 Humidity<strong id="humidity"></strong></div><div class="stat">🌬 Wind<strong id="wind"></strong></div><div class="stat">☁ Clouds<strong id="clouds"></strong></div></div><p class="footnote" id="updated"></p></article>
 <article class="panel"><div class="label">Your weather-inspired mix</div><div id="mood" class="mood"></div><h2 id="moodTitle" class="mood-title"></h2><p id="moodDescription" class="muted"></p><div class="preferences"><label for="genre">Favorite vibe</label><select id="genre"><option value="all">Surprise me</option><option value="pop">Pop</option><option value="indie">Indie / Acoustic</option><option value="instrumental">Instrumental</option><option value="bollywood">Bollywood</option></select></div><div id="playlist" class="playlist"></div><p class="footnote">Songs open a YouTube search in a new tab. Playback is provided by YouTube, not hosted by Weather Beats.</p></article>
-</section></main><footer>Weather Beats · Real-time weather meets music discovery · Weather data by Open-Meteo</footer></div>
+</section></main><div class="weather-bits" id="weatherBits" aria-hidden="true"></div><footer>Weather Beats · Real-time weather meets music discovery · Weather data by Open-Meteo</footer></div>
 <script>
 'use strict';
 const $=id=>document.getElementById(id);
@@ -42,4 +134,39 @@ $('searchForm').addEventListener('submit',async e=>{e.preventDefault();const cit
 $('locateButton').addEventListener('click',()=>{clearError();if(!navigator.geolocation){showError('Your browser does not support location detection. Search by city instead.');return}busy(true);navigator.geolocation.getCurrentPosition(async p=>{try{await loadWeather(p.coords.latitude,p.coords.longitude,'Your current location')}catch(err){showError(err.message||'Unable to retrieve weather.')}finally{busy(false)}},()=>{busy(false);showError('Location permission was denied or unavailable. You can search for a city instead.')},{timeout:12000,maximumAge:300000})});
 $('genre').addEventListener('change',()=>{if(currentMood)renderTracks()});
 $('cityInput').value='Moradabad';searchCity('Moradabad').catch(()=>{});
+
+/* Motion effects are decorative: weather, search, and playback links work without them. */
+(function(){
+ const reduceMotion=window.matchMedia('(prefers-reduced-motion: reduce)');
+ const sparkleLayer=document.getElementById('sparkles');
+ if(!reduceMotion.matches){
+   for(let i=0;i<28;i++){
+     const dot=document.createElement('span');dot.className='spark';
+     dot.style.left=((i*37+13)%97)+'%';dot.style.top=((i*53+11)%93)+'%';
+     dot.style.animationDelay=(-(i%9)*.37)+'s';dot.style.opacity=String(.22+(i%5)*.12);
+     sparkleLayer.appendChild(dot);
+   }
+ }
+ let lastMood='';
+ function refreshWeatherScene(){
+   if(!currentMood||currentMood===lastMood)return;
+   lastMood=currentMood;document.body.dataset.weather=currentMood;
+   const layer=document.getElementById('weatherBits');layer.replaceChildren();
+   if(reduceMotion.matches)return;
+   for(let i=0;i<23;i++){
+     const bit=document.createElement('span');bit.className='weather-bit';
+     bit.style.left=((i*41+7)%100)+'%';
+     bit.style.animationDuration=(7+(i%7)*1.8)+'s';
+     bit.style.animationDelay=(-(i*17%120)/10)+'s';
+     bit.style.opacity=String(.12+(i%5)*.055);
+     layer.appendChild(bit);
+   }
+ }
+ const resultObserver=new MutationObserver(refreshWeatherScene);
+ resultObserver.observe(document.getElementById('mood'),{childList:true,characterData:true,subtree:true});
+ const button=document.getElementById('searchButton');
+ const busyObserver=new MutationObserver(()=>document.body.classList.toggle('is-loading',button.disabled));
+ busyObserver.observe(button,{attributes:true,attributeFilter:['disabled']});
+})();
+
 </script></body></html>
